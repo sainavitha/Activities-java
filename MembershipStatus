@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class MembershipStatus {
+
+    public static void main(String[] args) {
+        String membershipStatus = getInput("Enter your membership status (premium/non-premium): ");
+        double purchaseAmount = getPurchaseAmount("Enter your total purchase amount: ");
+
+        double finalAmount = calculateFinalAmount(membershipStatus, purchaseAmount);
+
+        displayOutput(finalAmount);
+    }
+    public static String getInput(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(prompt);
+        return scanner.nextLine().trim().toLowerCase();
+    }
+    public static double getPurchaseAmount(String prompt) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(prompt);
+        return scanner.nextDouble();
+    }
+    public static double calculateFinalAmount(String membershipStatus, double purchaseAmount) {
+        double discount = 0.0;
+
+        if ("premium".equals(membershipStatus) && purchaseAmount > 1000) {
+            discount = 0.20;
+        } else if ("non-premium".equals(membershipStatus) && purchaseAmount > 2000) {
+            discount = 0.15;
+        }
+
+        return purchaseAmount * (1 - discount);
+    }
+
+    public static void displayOutput(double finalAmount) {
+        System.out.println("The final amount after discount (if applicable) is: " + finalAmount);
+}
+}
